@@ -1,0 +1,24 @@
+╔════════════════════════════════════════════════╗
+║  PAYROLL MANAGEMENT SYSTEM v1.0               ║
+║  Quick Start Guide                            ║
+╚════════════════════════════════════════════════╝
+
+BEFORE RUNNING:
+1. Install MySQL Server 8.0.46 (from MySQL Installer)
+2. Intall MySQL Workbench 8.0.46
+2. Create database: "payroll"
+3. Import database_schema.sql using MySQL Workbench
+
+TO RUN APPLICATION:
+1. Double-click: PayrollSystem.exe
+2. Login with: admin / admin
+3. Start adding employees!
+
+IMPORTANT:
+⚠️  All .dll files MUST be in same folder as .exe
+⚠️  MySQL Server must be running
+
+
+NEED HELP?
+- See INSTRUCTIONS for detailed setup
+- Check troubleshooting section if errors occur

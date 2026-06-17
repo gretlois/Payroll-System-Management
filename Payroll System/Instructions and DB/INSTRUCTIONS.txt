@@ -1,0 +1,176 @@
+# Installation & Setup Instructions
+
+## For Client/End User
+
+### Prerequisites
+1. Windows 7 or later
+2. Internet connection (for MySQL Installer)
+
+---
+
+## Step-by-Step Setup
+
+### 1. Install MySQL Server & Workbench
+
+**Download MySQL Installer:**
+- Go to: `https://dev.mysql.com/downloads/mysql/`
+- Download: **MySQL Installer (8.0.46 or later)**
+- Choose: **X64** version
+
+**Run MySQL Installer:**
+1. Double-click `mysql-installer-community-8.0.46.0.msi`
+2. Click "Next" through setup
+3. Select **Setup Type: Developer Default** (recommended)
+4. Click "Next"
+
+**Install Products:**
+You will see this screen:
+
+```
+Product               Version    Architecture 
+MySQL Server          8.0.46     X64          
+MySQL Workbench       8.0.46     X64           
+```
+
+ **Make sure BOTH are selected:**
+- ✓ MySQL Server 8.0.46 (X64)
+- ✓ MySQL Workbench 8.0.46 (X64)
+
+Click "Next" and "Execute" to install.
+
+---
+
+### 2. Configure MySQL Server
+
+MySQL Server Configuration:
+1. Keep defaults (Port: 3306)
+2. Set **Root Password:** `payrollsystem23!`
+3. Remember this password!
+4. Finish setup
+
+*Start MySQL Service:*
+- MySQL should auto-start after installation
+- Verify: Open Command Prompt
+  ```
+  mysql --version
+  ```
+  Should show: `mysql Ver 8.0.46`
+
+---
+
+### 3. Create Payroll Database
+
+*Open MySQL Workbench:**
+1. Click Start Menu → MySQL Workbench
+2. Connect to local MySQL server
+3. Use root password you just set (password:payrollsystem23!)
+
+*Create Database:*
+1. Right-click "Databases" (left panel)
+2. Select "Create Schema"
+3. Name: `payroll`
+4. Click "Apply" → "Finish"
+
+*Import Database Schema:*
+1. Right-click `payroll` database
+2. Select "Run SQL Script"
+3. Choose file: `Payroll_Database_schema.sql`
+4. Click "Run"
+5. Verify tables created:
+   - `employees`
+   - `payroll_history`
+   - `users`
+
+---
+
+### 4. Setup Application
+
+**Update Connection String (IMPORTANT!):**
+1. Open `PayrollSystem.sln` in Visual Studio 2022
+2. Open file: `database.h`
+3. Find this section:
+   ```cpp
+   bool Connect(const char* host = "127.0.0.1",
+       const char* user = "root",
+       const char* pass = "payrollsystem23!",  // ← Change if different
+       const char* db = "payroll",
+       unsigned int port = 3306)
+   ```
+4. Update `pass` value to match your MySQL root password
+5. Save file
+
+*Compile & Run:*
+1. Build Solution: `Ctrl+Shift+B`
+2. Run Application: `F5`
+3. Wait for compile to finish
+
+---
+
+### 5. First Login
+
+*Default Credentials:*
+- Username: `admin`
+- Password: `admin123`
+
+ **Login successful = System working!**
+
+---
+
+## Troubleshooting
+
+### "Cannot connect to database"
+*Solution:*
+- Open MySQL Workbench
+- Try to connect with root user
+- If fails → MySQL not running
+- Click: Start Menu → Services → Find "MySQL80" → Right-click → Start
+
+### "Connection refused on port 3306"
+*Solution:*
+- MySQL might be on different port
+- Open MySQL Workbench → Home → Edit Connection
+- Check port number
+- Update `database.h` port to match
+
+### "Access denied for user 'root'@'localhost'"
+*Solution:*
+- Password in `database.h` doesn't match MySQL root password
+- Open MySQL Workbench with correct password
+- Update `database.h` with correct password
+
+### "libmysql.dll not found"
+*Solution:*
+- MySQL was not installed properly
+- Reinstall MySQL Server using MySQL Installer
+- Ensure installation completed successfully
+
+---
+
+## ✅ Verification Checklist
+
+After setup, verify:
+
+- [ ] MySQL Server installed (check Services)
+- [ ] MySQL Workbench can connect
+- [ ] Payroll database created
+- [ ] `employees`, `payroll_history`, `users` tables exist
+- [ ] Default admin user can login to application
+- [ ] Can add employee (emp_code auto-generates)
+- [ ] Can compute payroll
+- [ ] Can view payroll records
+
+---
+
+## Support
+
+If any issues:
+1. Check MySQL is running
+2. Verify connection string in `database.h`
+3. Test MySQL Workbench connection first
+4. Check error messages in application
+
+---
+
+## Version
+*Payroll Management System v1.0*
+*Setup Date: June 2026
