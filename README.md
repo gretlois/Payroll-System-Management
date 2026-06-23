@@ -36,7 +36,7 @@ bool Connect(const char* host = "127.0.0.1",
 ```
 
 ### 3. Compile & Run
-- Open `PayrollSystem.sln` in Visual Studio 2026
+- Open `PayrollSystem.slnx` in Visual Studio 2026
 - Build Solution (Ctrl+Shift+B)
 - Run (F5)
 - Default Login: `admin` / `admin123`
